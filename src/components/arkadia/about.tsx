@@ -22,8 +22,8 @@ export function About() {
             О клинике
           </span>
           <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-arkadia-graphite leading-[1.1] tracking-tight max-w-3xl text-balance">
-            «Аркадия» — это{" "}
-            <span className="text-arkadia-blue">«страна счастливых людей»</span>
+            «Стандарт» — это{" "}
+            <span className="text-arkadia-blue">«медицинский стоматологический центр»</span>
           </h2>
         </motion.div>
 
@@ -41,7 +41,7 @@ export function About() {
             одна из первых частных стоматологий Ленинграда, открытая в 1989-м.
           </p>
           <p className="font-body text-base md:text-lg text-arkadia-graphite/85 leading-relaxed">
-            Сегодня Аркадия — это шесть филиалов по Петербургу, десятки врачей,
+            Сегодня Стандарт — это шесть филиалов по Петербургу, десятки врачей,
             тысячи пациентов, которые возвращаются поколениями. Рейтинг 4.9 на
             2ГИС — не маркетинг, а тридцать пять лет работы без спешки и без
             лишних манипуляций.

@@ -267,7 +267,7 @@ function StylizedMap({
             y1="0"
             x2={i * 50}
             y2="500"
-            stroke="#0000fa"
+            stroke="#0D9488"
             strokeWidth="0.5"
             opacity="0.1"
           />
@@ -279,7 +279,7 @@ function StylizedMap({
             y1={i * 50}
             x2="800"
             y2={i * 50}
-            stroke="#0000fa"
+            stroke="#0D9488"
             strokeWidth="0.5"
             opacity="0.1"
           />
@@ -315,7 +315,7 @@ function StylizedMap({
            L 100 80
            Z"
         fill="#FFFFFF"
-        stroke="#0000fa"
+        stroke="#0D9488"
         strokeWidth="1.5"
         opacity="0.9"
       />
@@ -330,7 +330,7 @@ function StylizedMap({
            L 170 230
            Z"
         fill="#FFFFFF"
-        stroke="#0000fa"
+        stroke="#0D9488"
         strokeWidth="1.5"
         opacity="0.9"
       />
@@ -344,7 +344,7 @@ function StylizedMap({
            L 240 160
            Z"
         fill="#FFFFFF"
-        stroke="#0000fa"
+        stroke="#0D9488"
         strokeWidth="1.5"
         opacity="0.9"
       />
@@ -352,7 +352,7 @@ function StylizedMap({
       {/* Реки — Нева */}
       <path
         d="M 0 200 Q 200 220 400 195 Q 600 175 800 200"
-        stroke="#0000fa"
+        stroke="#0D9488"
         strokeWidth="6"
         fill="none"
         opacity="0.25"
@@ -360,7 +360,7 @@ function StylizedMap({
       />
       <path
         d="M 350 0 Q 340 150 360 250 Q 380 350 370 500"
-        stroke="#0000fa"
+        stroke="#0D9488"
         strokeWidth="5"
         fill="none"
         opacity="0.25"
@@ -423,7 +423,7 @@ function StylizedMap({
                 cy={coord.y}
                 r="18"
                 fill="none"
-                stroke="#0000fa"
+                stroke="#0D9488"
                 strokeWidth="2"
                 initial={{ r: 18, opacity: 0.6 }}
                 animate={{ r: 32, opacity: 0 }}
@@ -440,8 +440,8 @@ function StylizedMap({
               cx={coord.x}
               cy={coord.y}
               r={isSelected ? 14 : (isHovered ? 12 : 10)}
-              fill={isSelected ? "#0000fa" : "#FFFFFF"}
-              stroke="#0000fa"
+              fill={isSelected ? "#0D9488" : "#FFFFFF"}
+              stroke="#0D9488"
               strokeWidth="2.5"
               style={{ transition: "all 0.3s ease" }}
             />
@@ -451,7 +451,7 @@ function StylizedMap({
               cx={coord.x}
               cy={coord.y}
               r={isSelected ? 4 : 3}
-              fill={isSelected ? "#FFFFFF" : "#0000fa"}
+              fill={isSelected ? "#FFFFFF" : "#0D9488"}
               style={{ transition: "all 0.3s ease" }}
             />
 
@@ -484,9 +484,9 @@ function StylizedMap({
 
       {/* Заголовок карты — стилизованный компас */}
       <g transform="translate(720, 50)" opacity="0.4">
-        <circle cx="0" cy="0" r="20" fill="none" stroke="#0000fa" strokeWidth="1" />
-        <path d="M 0 -15 L 3 0 L 0 15 L -3 0 Z" fill="#0000fa" />
-        <text x="0" y="-25" textAnchor="middle" className="font-display" style={{ fontSize: "9px", fill: "#0000fa", fontWeight: 600 }}>
+        <circle cx="0" cy="0" r="20" fill="none" stroke="#0D9488" strokeWidth="1" />
+        <path d="M 0 -15 L 3 0 L 0 15 L -3 0 Z" fill="#0D9488" />
+        <text x="0" y="-25" textAnchor="middle" className="font-display" style={{ fontSize: "9px", fill: "#0D9488", fontWeight: 600 }}>
           С
         </text>
       </g>

@@ -80,7 +80,7 @@ export function Hero() {
               "0 4px 24px rgba(0,0,0,0.45), 0 1px 0 rgba(0,0,0,0.3), 0 -1px 0 rgba(255,255,255,0.15)",
           }}
         >
-          АРКАДИЯ
+          СТАНДАРТ
         </motion.h1>
 
         <motion.p
@@ -89,7 +89,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 2.9 }}
           className="mt-5 font-body text-xs sm:text-sm uppercase tracking-[0.4em] text-white/85 text-center"
         >
-          страна счастливых людей
+          медицинский стоматологический центр
         </motion.p>
 
         <motion.div
@@ -105,7 +105,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 3.4 }}
           className="mt-5 font-body text-xs text-white/70 max-w-md text-center px-6 leading-relaxed"
         >
-          Стоматология в Петербурге. Шесть филиалов.
+          Стоматология на Стачек. Шесть филиалов.
           <br className="hidden sm:block" />
           Тридцать пять лет, которые не прошли зря.
         </motion.p>

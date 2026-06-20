@@ -98,7 +98,7 @@ export function HistoryTrail() {
             {/* Фоновая тропинка (серая, вся) */}
             <path
               d={pathD}
-              stroke="#0000fa20"
+              stroke="#0D948820"
               strokeWidth="2"
               strokeDasharray="6 8"
               strokeLinecap="round"
@@ -108,7 +108,7 @@ export function HistoryTrail() {
             {currentStep > 0 && (
               <motion.path
                 d={pathD}
-                stroke="#0000fa"
+                stroke="#0D9488"
                 strokeWidth="2.5"
                 strokeDasharray="6 8"
                 strokeLinecap="round"
@@ -152,8 +152,8 @@ export function HistoryTrail() {
                     cx={p.x}
                     cy={p.y}
                     r={isCurrent ? 14 : (isPassed ? 8 : 6)}
-                    fill={isCurrent ? "#0000fa" : (isPassed ? "#0000fa" : "white")}
-                    stroke={isPassed ? "#0000fa" : "#94A3B8"}
+                    fill={isCurrent ? "#0D9488" : (isPassed ? "#0D9488" : "white")}
+                    stroke={isPassed ? "#0D9488" : "#94A3B8"}
                     strokeWidth="2"
                     animate={{
                       r: isCurrent ? [14, 16, 14] : (isPassed ? 8 : 6),
@@ -182,7 +182,7 @@ export function HistoryTrail() {
                       cy={p.y}
                       r="14"
                       fill="none"
-                      stroke="#0000fa"
+                      stroke="#0D9488"
                       strokeWidth="2"
                       initial={{ r: 14, opacity: 0.6 }}
                       animate={{ r: 28, opacity: 0 }}

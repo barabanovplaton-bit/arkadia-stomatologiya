@@ -1,12 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "standalone",
-  /* config options here */
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  output: "export",
+  basePath: "/standart-stomatologiya",
+  images: { unoptimized: true },
+  trailingSlash: true,
+  typescript: { ignoreBuildErrors: true },
   reactStrictMode: false,
+  turbopack: { root: __dirname },
 };
 
 export default nextConfig;

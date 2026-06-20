@@ -18,7 +18,7 @@ export function Footer() {
               </span>
               <div>
                 <p className="font-display text-base font-semibold">
-                  Аркадия
+                  Стандарт
                 </p>
                 <p className="font-body text-[10px] text-white/60 mt-0.5">
                   стоматология · с 1989
@@ -26,7 +26,7 @@ export function Footer() {
               </div>
             </div>
             <p className="font-body text-sm text-white/70 leading-relaxed">
-              «Аркадия» — страна счастливых людей.
+              «Стандарт» — медицинский стоматологический центр.
               <br />
               Стоматологическая клиника в Петербурге.
             </p>
@@ -119,7 +119,7 @@ export function Footer() {
         {/* Нижний бар */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="font-body text-xs text-white/50 text-center md:text-left">
-            © 1989 — {new Date().getFullYear()} · Стоматологическая клиника «Аркадия» ·
+            © 1989 — {new Date().getFullYear()} · Стоматологическая клиника «Стандарт» ·
             Санкт-Петербург
           </p>
           <p className="font-body text-[10px] uppercase tracking-[0.2em] text-white/35">
