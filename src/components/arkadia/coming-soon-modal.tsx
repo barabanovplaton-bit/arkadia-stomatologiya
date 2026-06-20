@@ -19,34 +19,13 @@ export function useComingSoon() {
 }
 
 const sectionLabels: Record<string, { title: string; subtitle: string }> = {
-  services: {
-    title: "Услуги",
-    subtitle: "Полный каталог направлений клиники с ценами",
-  },
-  clinics: {
-    title: "Филиалы",
-    subtitle: "Семь адресов в Петербурге с картой и схемой проезда",
-  },
-  doctors: {
-    title: "Врачи",
-    subtitle: "Команда специалистов с регалиями и опытом",
-  },
-  reviews: {
-    title: "Отзывы",
-    subtitle: "Все 216 отзывов пациентов на 2ГИС",
-  },
-  contacts: {
-    title: "Контакты",
-    subtitle: "Телефоны, адреса и форма записи",
-  },
-  appointment: {
-    title: "Запись на приём",
-    subtitle: "Выберите филиал, врача и удобное время",
-  },
-  prices: {
-    title: "Цены",
-    subtitle: "Прозрачный прайс по всем направлениям",
-  },
+  services: { title: "Услуги", subtitle: "Полный каталог направлений клиники с ценами" },
+  clinics: { title: "Филиалы", subtitle: "Шесть адресов в Петербурге с картой и схемой проезда" },
+  doctors: { title: "Врачи", subtitle: "Команда специалистов с регалиями и опытом" },
+  reviews: { title: "Отзывы", subtitle: "Все 632 отзывов пациентов на Яндекс.Картах, 2ГИС и Google" },
+  contacts: { title: "Контакты", subtitle: "Телефоны, адреса и форма записи" },
+  appointment: { title: "Запись на приём", subtitle: "Выберите филиал, врача и удобное время" },
+  prices: { title: "Цены", subtitle: "Прозрачный прайс по всем направлениям" },
 };
 
 export function ComingSoonProvider({
@@ -73,7 +52,6 @@ export function ComingSoonProvider({
     };
   }, [isOpen]);
 
-  // Закрытие по Escape
   useEffect(() => {
     if (!isOpen) return;
     const onKey = (e: KeyboardEvent) => {
@@ -83,10 +61,7 @@ export function ComingSoonProvider({
     return () => window.removeEventListener("keydown", onKey);
   }, [isOpen]);
 
-  const labels = sectionLabels[section] ?? {
-    title: "Раздел",
-    subtitle: "Страница в разработке",
-  };
+  const labels = sectionLabels[section] ?? { title: "Раздел", subtitle: "Страница в разработке" };
 
   return (
     <ComingSoonContext.Provider value={{ open }}>
@@ -102,7 +77,6 @@ export function ComingSoonProvider({
             onClick={() => setIsOpen(false)}
           >
             <div className="absolute inset-0 bg-arkadia-graphite/40 backdrop-blur-md" />
-
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 12 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -118,16 +92,14 @@ export function ComingSoonProvider({
               >
                 <X className="h-5 w-5" />
               </button>
-
               <div className="text-center">
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-arkadia-navy/8 text-arkadia-navy text-xs font-medium">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-arkadia-blue/8 text-arkadia-blue text-xs font-medium">
                   <span className="relative flex h-1.5 w-1.5">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-arkadia-navy opacity-75 animate-ping" />
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-arkadia-navy" />
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-arkadia-blue opacity-75 animate-ping" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-arkadia-blue" />
                   </span>
                   Готовится к запуску
                 </span>
-
                 <motion.h3
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -136,7 +108,6 @@ export function ComingSoonProvider({
                 >
                   {labels.title}
                 </motion.h3>
-
                 <motion.p
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -145,30 +116,26 @@ export function ComingSoonProvider({
                 >
                   {labels.subtitle}
                 </motion.p>
-
                 <motion.div
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ delay: 0.3, duration: 0.6 }}
-                  className="mx-auto mt-6 h-px w-16 origin-center bg-arkadia-navy/30"
+                  className="mx-auto mt-6 h-px w-16 origin-center bg-arkadia-blue/30"
                 />
-
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.5 }}
                   className="mt-6 font-body text-base text-arkadia-graphite/85 leading-relaxed"
                 >
-                  Раздел будет доступен в полном сайте клиники.
-                  Записаться на приём можно по телефону или через форму на этой странице.
+                  Раздел будет доступен в полном сайте клиники. Записаться на приём можно по телефону или через форму на этой странице.
                 </motion.p>
-
                 <motion.button
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.4 }}
                   onClick={() => setIsOpen(false)}
-                  className="mt-7 inline-flex items-center justify-center px-6 py-3 rounded-xl font-body text-sm font-medium text-arkadia-paper bg-arkadia-navy hover:bg-arkadia-navy-dark transition-colors duration-200"
+                  className="mt-7 inline-flex items-center justify-center px-6 py-3 rounded-xl font-body text-sm font-medium text-arkadia-paper bg-arkadia-blue hover:bg-arkadia-blue-soft transition-colors duration-200"
                 >
                   Понятно
                 </motion.button>

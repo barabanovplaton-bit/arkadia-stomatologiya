@@ -1,238 +1,147 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { history } from "./clinic-data";
+import { AnimatedHeadingLetters } from "./animated-text";
 
 export function HistoryTrail() {
   const [currentStep, setCurrentStep] = useState(0);
   const totalSteps = history.timeline.length;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.offsetWidth);
+      }
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   const nextStep = () => {
-    if (currentStep < totalSteps - 1) {
-      setCurrentStep(currentStep + 1);
-    }
+    if (currentStep < totalSteps - 1) setCurrentStep(currentStep + 1);
   };
 
   const prevStep = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
+    if (currentStep > 0) setCurrentStep(currentStep - 1);
   };
 
-  // Координаты точек на тропинке — извилистая
-  // Распределены по горизонтали, с разной высотой
-  const points = [
-    { x: 50, y: 220 },   // 1989 — низ
-    { x: 200, y: 110 },  // 1991 — верх
-    { x: 400, y: 180 },  // 2002 — середина
-    { x: 580, y: 90 },   // 2004 — верх
-    { x: 750, y: 160 },  // 2024 — середина
-  ];
-
-  // Расчёт длины пути пропорционально разнице лет
-  const yearDiffs = [];
-  for (let i = 1; i < history.timeline.length; i++) {
-    const prev = parseInt(history.timeline[i - 1].year);
-    const curr = parseInt(history.timeline[i].year);
-    yearDiffs.push(curr - prev);
-  }
-
-  // SVG path — извилистая кривая через все точки
-  const pathD = points
-    .map((p, i) => {
-      if (i === 0) return `M ${p.x} ${p.y}`;
-      const prev = points[i - 1];
-      const cp1x = prev.x + (p.x - prev.x) * 0.5;
-      const cp1y = prev.y + (p.y - prev.y) * 0.1;
-      const cp2x = prev.x + (p.x - prev.x) * 0.5;
-      const cp2y = p.y + (prev.y - p.y) * 0.1;
-      return `C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p.x} ${p.y}`;
-    })
-    .join(" ");
+  const totalWidth = 100;
+  const stepWidth = totalWidth / (totalSteps - 1);
+  const points = history.timeline.map((_, i) => ({
+    x: 5 + i * stepWidth * 0.9,
+  }));
 
   const currentItem = history.timeline[currentStep];
+  const POPUP_WIDTH = 260;
+  const ARROW_WIDTH = 14;
+  const currentPointX = (points[currentStep].x / 100) * containerWidth;
+  const popupLeftPx = Math.max(0, Math.min(containerWidth - POPUP_WIDTH, currentPointX - POPUP_WIDTH / 2));
+  const arrowLeftPx = currentPointX - ARROW_WIDTH / 2;
 
   return (
-    <section
-      id="history"
-      className="relative bg-arkadia-mist py-20 md:py-32 overflow-hidden"
-    >
+    <section id="history" className="relative bg-arkadia-mist py-20 md:py-32 overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 md:px-8">
-        {/* Заголовок */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="mb-12 md:mb-16 text-center"
+          className="mb-12 md:mb-20 text-center"
         >
           <span className="inline-block px-3 py-1 rounded-full bg-arkadia-blue/10 text-arkadia-blue text-xs font-medium mb-4">
             История клиники
           </span>
-          <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-arkadia-graphite leading-[1.1] tracking-tight max-w-3xl mx-auto text-balance">
-            Тридцать пять лет по{" "}
-            <span className="text-arkadia-blue">одной тропинке</span>
-          </h2>
-          <p className="mt-5 font-body text-base text-arkadia-slate max-w-xl mx-auto leading-relaxed">
-            Идите по тропинке шаг за шагом — каждый шаг, как год в истории
-            клиники.
-          </p>
+          <AnimatedHeadingLetters
+            className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-arkadia-graphite leading-[1.1] tracking-tight max-w-3xl mx-auto text-balance"
+          >
+            35 лет по одной шкале
+          </AnimatedHeadingLetters>
         </motion.div>
 
-        {/* SVG-тропинка с точками */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="relative w-full max-w-3xl mx-auto"
-        >
-          <svg
-            viewBox="0 0 800 280"
-            className="w-full h-auto"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Фоновая тропинка (серая, вся) */}
-            <path
-              d={pathD}
-              stroke="#0D948820"
-              strokeWidth="2"
-              strokeDasharray="6 8"
-              strokeLinecap="round"
+        <div ref={containerRef} className="relative w-full max-w-4xl mx-auto pt-48 md:pt-56">
+          <div className="absolute inset-x-0 top-0 h-40 md:h-44">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentStep}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute"
+                style={{ left: `${popupLeftPx}px`, width: `${POPUP_WIDTH}px`, maxWidth: "90vw" }}
+              >
+                <div className="text-center mb-2">
+                  <motion.p
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
+                    className="font-display text-3xl md:text-4xl font-bold text-arkadia-blue leading-none"
+                  >
+                    {currentItem.year}
+                  </motion.p>
+                </div>
+                <div className="rounded-2xl bg-white border border-arkadia-graphite/8 p-4 md:p-5 shadow-soft-md">
+                  <p className="font-body text-xs md:text-sm text-arkadia-graphite leading-relaxed text-center">
+                    {currentItem.event}
+                  </p>
+                </div>
+                <div className="absolute top-full" style={{ left: `${arrowLeftPx - popupLeftPx}px` }}>
+                  <svg width={ARROW_WIDTH} height="10" viewBox="0 0 14 10" fill="none">
+                    <path d="M 7 10 L 0 0 L 14 0 Z" fill="#FFFFFF" />
+                  </svg>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className="relative h-1 w-full bg-arkadia-graphite/10 rounded-full">
+            <motion.div
+              className="absolute top-0 left-0 h-full bg-arkadia-blue rounded-full"
+              initial={{ width: "0%" }}
+              animate={{ width: `${points[currentStep].x}%` }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             />
-
-            {/* Прорисованная часть тропинки (до текущего шага) */}
-            {currentStep > 0 && (
-              <motion.path
-                d={pathD}
-                stroke="#0D9488"
-                strokeWidth="2.5"
-                strokeDasharray="6 8"
-                strokeLinecap="round"
-                fill="none"
-                initial={{ pathLength: 0 }}
-                animate={{
-                  pathLength: points
-                    .slice(0, currentStep + 1)
-                    .reduce((acc, _, i, arr) => {
-                      if (i === 0) return 0;
-                      const p1 = points[i - 1];
-                      const p2 = points[i];
-                      return acc + Math.sqrt((p2.x - p1.x) ** 2 + (p2.y - p1.y) ** 2);
-                    }, 0) / 900,
-                }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-              />
-            )}
-
-            {/* Точки */}
             {points.map((p, i) => {
               const isPassed = i <= currentStep;
               const isCurrent = i === currentStep;
               return (
-                <g key={i}>
-                  {/* Метка года */}
-                  <text
-                    x={p.x}
-                    y={p.y - 24}
-                    textAnchor="middle"
-                    className={`font-display font-bold transition-colors duration-300 ${
-                      isPassed ? "fill-arkadia-blue" : "fill-arkadia-ash"
-                    }`}
-                    style={{ fontSize: "16px" }}
-                  >
+                <button
+                  key={i}
+                  onClick={() => setCurrentStep(i)}
+                  className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 group"
+                  style={{ left: `${p.x}%` }}
+                  aria-label={`Перейти к ${history.timeline[i].year} году`}
+                >
+                  <span className={`absolute top-6 left-1/2 -translate-x-1/2 font-display text-xs font-semibold whitespace-nowrap transition-colors duration-300 ${
+                    isPassed ? "text-arkadia-blue" : "text-arkadia-ash"
+                  }`}>
                     {history.timeline[i].year}
-                  </text>
-
-                  {/* Внешний круг точки */}
-                  <motion.circle
-                    cx={p.x}
-                    cy={p.y}
-                    r={isCurrent ? 14 : (isPassed ? 8 : 6)}
-                    fill={isCurrent ? "#0D9488" : (isPassed ? "#0D9488" : "white")}
-                    stroke={isPassed ? "#0D9488" : "#94A3B8"}
-                    strokeWidth="2"
-                    animate={{
-                      r: isCurrent ? [14, 16, 14] : (isPassed ? 8 : 6),
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: isCurrent ? Infinity : 0,
-                      ease: "easeInOut",
-                    }}
-                  />
-
-                  {/* Внутренняя точка */}
+                  </span>
                   {isCurrent && (
-                    <circle
-                      cx={p.x}
-                      cy={p.y}
-                      r="4"
-                      fill="white"
+                    <motion.span
+                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-arkadia-blue/30"
+                      animate={{ width: [16, 36, 16], height: [16, 36, 16], opacity: [0.6, 0, 0.6] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
                     />
                   )}
-
-                  {/* Пульсация вокруг активной точки */}
-                  {isCurrent && (
-                    <motion.circle
-                      cx={p.x}
-                      cy={p.y}
-                      r="14"
-                      fill="none"
-                      stroke="#0D9488"
-                      strokeWidth="2"
-                      initial={{ r: 14, opacity: 0.6 }}
-                      animate={{ r: 28, opacity: 0 }}
-                      transition={{
-                        duration: 1.8,
-                        repeat: Infinity,
-                        ease: "easeOut",
-                      }}
-                    />
-                  )}
-                </g>
+                  <span className={`block rounded-full border-2 transition-all duration-300 group-hover:scale-125 ${
+                    isCurrent ? "bg-arkadia-blue border-arkadia-blue w-5 h-5"
+                    : isPassed ? "bg-arkadia-blue border-arkadia-blue w-3 h-3"
+                    : "bg-white border-arkadia-ash w-3 h-3"
+                  }`} />
+                </button>
               );
             })}
-          </svg>
-        </motion.div>
-
-        {/* Карточка текущего события */}
-        <div className="mt-10 md:mt-14 max-w-2xl mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentStep}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="relative rounded-2xl bg-white border border-arkadia-graphite/8 p-6 md:p-8 shadow-soft"
-            >
-              {/* Год крупно */}
-              <p className="font-display text-5xl md:text-6xl font-bold text-arkadia-blue leading-none">
-                {currentItem.year}
-              </p>
-
-              {/* Линия */}
-              <div className="mt-4 h-px w-16 bg-arkadia-blue/30" />
-
-              {/* Текст события */}
-              <p className="mt-5 font-body text-base md:text-lg text-arkadia-graphite leading-relaxed">
-                {currentItem.event}
-              </p>
-
-              {/* Номер шага */}
-              <span className="absolute top-6 right-6 font-body text-xs text-arkadia-ash">
-                {currentStep + 1} / {totalSteps}
-              </span>
-            </motion.div>
-          </AnimatePresence>
+          </div>
         </div>
 
-        {/* Кнопки управления */}
-        <div className="mt-8 flex items-center justify-center gap-4">
+        <div className="mt-16 md:mt-20 flex items-center justify-center gap-4">
           <button
             onClick={prevStep}
             disabled={currentStep === 0}
@@ -241,7 +150,9 @@ export function HistoryTrail() {
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
-
+          <div className="px-4 py-2 rounded-full bg-white border border-arkadia-graphite/10 font-body text-xs text-arkadia-slate whitespace-nowrap">
+            <span className="font-semibold text-arkadia-graphite">{currentStep + 1}</span> / {totalSteps}
+          </div>
           <button
             onClick={nextStep}
             disabled={currentStep === totalSteps - 1}
@@ -251,17 +162,6 @@ export function HistoryTrail() {
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>
-
-        {/* Подсказка */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-6 text-center font-body text-xs text-arkadia-slate"
-        >
-          или просто листайте дальше — тропинка никуда не убежит
-        </motion.p>
       </div>
     </section>
   );

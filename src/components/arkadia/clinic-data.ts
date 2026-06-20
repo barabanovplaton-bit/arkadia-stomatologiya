@@ -1,34 +1,9 @@
 // Данные клиники «Деми Дети»
-// Рейтинг: 5.0 на Яндекс.Картах (588 отзывов), 4.9 на 2ГИС (32 отзыва)
-// Филиалов: 1 — детская стоматология
-
-export type Branch = {
-  id: string;
-  name: string;
-  address: string;
-  phone: string;
-  hours: string;
-  metro?: string;
-  district?: string;
-};
-
-export const clinicStats = {
-  rating: "5.0",
-  reviewsCount2gis: "32",
-  reviewsCountYandex: "588",
-  reviewsCountGoogle: "12",
-  reviewsCountTotal: "632",
-  foundedYear: 2010,
-  branchesCount: 1,
-  yearsActive: new Date().getFullYear() - 2010,
-  mainPhone: "+7 (812) 634-46-24",
-  website: "demi-kids.ru",
-};
-
+export type Branch = { id: string; name: string; address: string; phone: string; hours: string; metro?: string; district?: string; };
+export const clinicStats = { rating: "5.0", reviewsCount2gis: "32", reviewsCountYandex: "588", reviewsCountGoogle: "12", reviewsCountTotal: "632", foundedYear: 2010, branchesCount: 1, yearsActive: new Date().getFullYear() - 2010, mainPhone: "+7 (812) 634-46-24", website: "demi-kids.ru" };
 export const branches: Branch[] = [
   { id: "tramvayny", name: "На Трамвайном", address: "Трамвайный пр., 1, лит. А", phone: "+7 (812) 634-46-24", hours: "Пн–Сб 8:30–21:00 · Вс 9:00–18:00", metro: "Ленинский проспект", district: "Кировский" },
 ];
-
 export const services = [
   { id: "therapy", num: "01", title: "Лечение зубов", text: "Лечение молочных и постоянных зубов у детей. Без боли и страха." },
   { id: "surgery", num: "02", title: "Хирургия", text: "Удаление молочных зубов. Аккуратно, когда выпадение задерживается." },
@@ -39,7 +14,6 @@ export const services = [
   { id: "diagnostics", num: "07", title: "Диагностика", text: "Прицельный снимок, ОПТГ. Контроль роста зубов у детей." },
   { id: "sedation", num: "08", title: "Лечение во сне", text: "Лечение под седацией для детей, которым сложно высидеть в кресле." },
 ];
-
 export const doctors = [
   { initials: "ВВ", name: "Валентина Вячеславовна", role: "Главный врач · детский стоматолог", since: "в Деми Дети с 2010", quote: "Каждый ребёнок заслуживает здоровую улыбку без страха." },
   { initials: "АП", name: "Анастасия Павловна", role: "Гигиенист стоматологический", since: "в Деми Дети с 2014", quote: "Профилактика — это когда ребёнок не знает, что такое бор." },
@@ -48,7 +22,6 @@ export const doctors = [
   { initials: "ОА", name: "Ольга Андреевна", role: "Детский стоматолог", since: "в Деми Дети с 2017", quote: "Если ребёнок смеётся в кресле — я сделала свою работу." },
   { initials: "НК", name: "Наталья Кирилловна", role: "Детский стоматолог", since: "в Деми Дети с 2018", quote: "Дети чувствуют искренность. Если боишься — они тоже будут." },
 ];
-
 export const reviews = [
   { dateMonth: "Май", dateYear: "2025", name: "Елена М.", note: "мама Артёма, 5 лет", rating: 5, text: "Наша любимая стоматология. Ребёнок ходит без страха, с удовольствием. Здесь очень внимательные и профессиональные врачи, я как мама довольна на 100%." },
   { dateMonth: "Март", dateYear: "2025", name: "Ольга К.", note: "мама Софии, 7 лет", rating: 5, text: "Понравилось хорошее, дружелюбное отношение. Валентина Вячеславовна всё объясняет быстро и понятно. Консультация прошла просто и легко." },
@@ -56,14 +29,10 @@ export const reviews = [
   { dateMonth: "Декабрь", dateYear: "2024", name: "Анна В.", note: "мама близнецов, 6 лет", rating: 5, text: "Приводим двоих детей. Всегда вежливые администраторы, удобная запись. Дети в восторге от атмосферы — играют, пока ждут." },
   { dateMonth: "Ноябрь", dateYear: "2024", name: "Сергей Л.", note: "папа Кати, 8 лет", rating: 5, text: "Лечили два зуба за один визит. Дочь не плакала ни разу. Это чудо для нас — раньше истерики были в каждой клинике." },
 ];
-
-export const history = {
-  founded: 2010,
-  timeline: [
-    { year: "2010", event: "Основана детская стоматология «Деми Дети» на Трамвайном проспекте." },
-    { year: "2014", event: "Расширение команды детских специалистов, внедрение лечения во сне." },
-    { year: "2018", event: "Ремонт и модернизация — игровые зоны, новое оборудование." },
-    { year: "2022", event: "Внедрение цифровых технологий диагностики для детей." },
-    { year: "2025", event: "Рейтинг 5.0 · более 630 отзывов · тысячи счастливых детских улыбок." },
-  ],
-};
+export const history = { founded: 2010, timeline: [
+  { year: "2010", event: "Основана детская стоматология «Деми Дети» на Трамвайном проспекте." },
+  { year: "2014", event: "Расширение команды детских специалистов, внедрение лечения во сне." },
+  { year: "2018", event: "Ремонт и модернизация — игровые зоны, новое оборудование." },
+  { year: "2022", event: "Внедрение цифровых технологий диагностики для детей." },
+  { year: "2025", event: "Рейтинг 5.0 · более 630 отзывов · тысячи счастливых детских улыбок." },
+]};
