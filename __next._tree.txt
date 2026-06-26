@@ -1,0 +1,7 @@
+:HL["/arkadia-stomatologiya/_next/static/chunks/2_394ei_ief4n.css","style"]
+:HL["/arkadia-stomatologiya/_next/static/chunks/3tg0zwaio2r5y.css","style"]
+:HL["/arkadia-stomatologiya/_next/static/media/16d91c780434f2ce-s.p.0shchh0jtv0ui.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/arkadia-stomatologiya/_next/static/media/8800dfc60902df36-s.p.3nasnllvo8ig4.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/arkadia-stomatologiya/_next/static/media/b4a06a523f527a0e-s.p.3psl0_mnhzy2y.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/arkadia-stomatologiya/_next/static/media/cfdfbee4d6cf0a93-s.p.1jwcpm6w583_v.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"fn-fMIRq9C2CdHs5MVt7g"}
